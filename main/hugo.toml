@@ -1,4 +1,50 @@
-languageCode = 'en-us'
-title = 'Portfolio Site'
-theme = 'devise'
+title = "Emily Miller"
+languageCode = "en-us"
+theme = "devise"
+relativeURLs = true
+enableEmoji = true
+googleAnalytics = ""
+enableRobotsTXT = true
+copyright = "&copy; 2025, Emily Miller <br /> Hosted with <a href='https://tardisproject.uk'>Tardis</a>"
+
+# Main menu items
+[menu]
+  [[menu.main]]
+    identifier = "resume"
+    name = "Resume"
+    title = "Resume"
+    url = "/resume.pdf"
+    weight = -110
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    title = "About"
+    url = "/about"
+    weight = -100
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    title = "Posts"
+    url = "/post/"
+    weight = -90
+
+# Configuration Features
+[params]
+  description = "Emily Miller's portfolio website and technical blog!"      # Your meta description of the site
+  header_title = "Emily Miller"                 # Your header title
+  header_subtitle = "Hey there! I'm Emily, a current student and tech enthuse." # Your header subtitle
+  home_image = "avatar.jpg"          # Path to header image starting from the static directory (optional)
+  recent_posts = 5                           # Max amount of recent posts to show
+  mainSections = ["posts", "post", "blog"]   # Main sections to include in recent posts
+  [params.style]                             # CSS style overrides
+    backgroundColor = "#f8f9fa"
+    homeImageBorderColor = "#ffffff"
+    fontFamilyBase = "Helvetica Neue"        # First-choice font
+    fontColor = "#212529"
+  [[params.social]]
+    fa_icon = "fab fa-github fa-1x"          # Font Awesome icon class
+    href = "http://github.com/python151"      # Link to associate with icon (http://, https://, mailto:)
+  [[params.social]]
+    fa_icon = "fab fa-linkedin-in fa-1x"
+    href = "https://www.linkedin.com/in/emilymillerxyz/"
 
