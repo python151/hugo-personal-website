@@ -15,6 +15,7 @@ jobs:
 
     - name: Run curl POST request
       run: |
-        curl -X POST --data "API_KEY=${{ secrets.MANAGEMENT_API_KEY }}" -H
-        "Content-Type: text/plain" https://management-api.emilymiller.xyz/deploy
-
+        curl -X POST \
+        --data "${{ secrets.MANAGEMENT_API_KEY }}" \
+        -H "Content-Type: text/plain" \
+        https://management-api.emilymiller.xyz/deploy
