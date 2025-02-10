@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Index on Emily Miller</title>
-    <link>/tags/index/</link>
+    <link>//localhost:1313/tags/index/</link>
     <description>Recent content in Index on Emily Miller</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2025, Emily Miller &lt;br /&gt; Hosted with &lt;a href=&#39;https://tardisproject.uk&#39;&gt;Tardis&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Posts</title>
-      <link>/post/</link>
+      <link>//localhost:1313/post/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>/post/</guid>
+      <guid>//localhost:1313/post/</guid>
       <description></description>
     </item>
   </channel>

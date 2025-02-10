@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Emily Miller</title>
-    <link>/</link>
+    <link>//localhost:1313/</link>
     <description>Recent content on Emily Miller</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2025, Emily Miller &lt;br /&gt; Hosted with &lt;a href=&#39;https://tardisproject.uk&#39;&gt;Tardis&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 10 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to: Basic buffer overflows without stack protections</title>
-      <link>/post/how_to_basic_buffer_overflows/</link>
+      <link>//localhost:1313/post/how_to_basic_buffer_overflows/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>/post/how_to_basic_buffer_overflows/</guid>
+      <guid>//localhost:1313/post/how_to_basic_buffer_overflows/</guid>
       <description>&lt;p&gt;Kind of starting a little basic, but what is a buffer overflow? Effectively,&#xA;when the program is expecting a certain amount of data to be written, and more&#xA;data than that gets written, &lt;em&gt;overflowing&lt;/em&gt; the buffer. When done on the stack&#xA;(the most basic case), this is often called &lt;em&gt;stack smashing&lt;/em&gt; (likely popularized&#xA;by the amazing stack canary message &amp;ldquo;**** stack smashing detected ****&amp;rdquo;).&lt;/p&gt;&#xA;&lt;p&gt;For instance, if our memory looks something like below:&lt;/p&gt;</description>
     </item>
     <item>
       <title>How to: Buffer overflows with PIE, Canaries, and NX Bit</title>
-      <link>/post/how_to_buffer_overflows_with_stack_protections/</link>
+      <link>//localhost:1313/post/how_to_buffer_overflows_with_stack_protections/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>/post/how_to_buffer_overflows_with_stack_protections/</guid>
+      <guid>//localhost:1313/post/how_to_buffer_overflows_with_stack_protections/</guid>
       <description>&lt;p&gt;What stack protections are we talking about? Here we&amp;rsquo;re only talking about&#xA;bypassing PIE, Stack Canaries, and NX Bit, because these are found in almost every binary&#xA;compiled nowadays and you will be expected to know this in any basic binary&#xA;exploitation exercise.&lt;/p&gt;&#xA;&lt;h4 id=&#34;you-speak-all-these-words-woman-but-i-understand-not&#34;&gt;You speak all these words, woman, but I understand not.&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;What&amp;rsquo;s PIE?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;PIE stands for Position Independent Executable, and all it means is&#xA;that it can get loaded into different positions in memory randomly at runtime,&#xA;which makes exploitation a bit harder. How do we bypass this in terms of buffer&#xA;overflows?  Using &lt;em&gt;partial address overwrites&lt;/em&gt;! Instead of overwriting the&#xA;entire buffer, we can only overwrite the last 2 bytes, and because of things get&#xA;loaded in, 12 of those bytes will be the same every time, so we only need to&#xA;brute force 2^4 or 16 combinations.&lt;/p&gt;</description>
     </item>
     <item>
       <title>First Post</title>
-      <link>/post/first_post/</link>
+      <link>//localhost:1313/post/first_post/</link>
       <pubDate>Sun, 09 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>/post/first_post/</guid>
+      <guid>//localhost:1313/post/first_post/</guid>
       <description>&lt;p&gt;Hey, I have this now! 🎉&#xA;Excited to start sharing my work and ideas here. Stay tuned for more updates!&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>/about/</link>
+      <link>//localhost:1313/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/about/</guid>
+      <guid>//localhost:1313/about/</guid>
       <description>&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;University of Edinburgh&lt;/strong&gt;&#xA;BSc Computer Science and Mathematics (Hons)&#xA;September 2024 - June 2028&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Tarrant County College&lt;/strong&gt;&#xA;Dual Credit Program&#xA;May 2022 - June 2024&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;experience&#34;&gt;Experience&lt;/h2&gt;&#xA;&lt;h3 id=&#34;textron-it-co-op-cloud-operations&#34;&gt;Textron, IT Co-Op, Cloud Operations&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;May 2023 - August 2024 (Part-Time, Avg. 25 hrs/week)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Developed enterprise firewall change request process to streamline changes in ServiceNow, integrating with 7 business units and 3 vendors, impacting over 350 tickets.&lt;/li&gt;&#xA;&lt;li&gt;Assisted in automating operational processes, including the VM modification and decommission workflows, testing, and pushing 17 change requests to production.&lt;/li&gt;&#xA;&lt;li&gt;Automated operational readiness reviews (ORRs) using Azure Service Bus REST API.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;textron-it-intern-cybersecurity-engineering&#34;&gt;Textron, IT Intern, Cybersecurity Engineering&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;August 2022 - May 2023 (Part-Time, Avg. 20 hrs/week)&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>

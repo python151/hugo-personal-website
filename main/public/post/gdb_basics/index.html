@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Emily Miller</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The use of debuggers like GDB is a fundamental skill in binary
+exploitation and reverse engineering, but can be difficult to grasp at first.
+Here&#39;s a &#39;Crash course&#39; GDB.&#34;" />
+
+    
+    
+    
+    <link rel="stylesheet" href="../../css/theme.min.css">
+
+    
+    
+    
+
+    
+</head>
+<body>
+        <div id="content" class="mx-auto"><header class="container mt-sm-5 mt-4 mb-4 mt-xs-1">
+    <div class="row">
+        
+        <div class="col-sm-4 col-12 text-sm-right text-center pt-sm-4">
+            <a href="../../" class="text-decoration-none">
+                <img id="home-image" class="rounded-circle"
+                    
+                        
+                            src="../../avatar.jpg"
+                        
+                    
+                />
+            </a>
+        </div>
+        <div class="col-sm-8 col-12 text-sm-left text-center">
+        
+            <h2 class="m-0 mb-2 mt-4">
+                <a href="../../" class="text-decoration-none">
+                    
+                        Emily Miller
+                    
+                </a>
+            </h2>
+            <p class="text-muted mb-1">
+                
+                    Hey there! I&#39;m Emily, a current student and tech enthuse. I&#39;m especially interested in Cybersecurity and Vulnerability research, and write technical blogs describing predominantly binary exploitation and cryptography.
+                
+            </p>
+            <ul id="nav-links" class="list-inline mb-2">
+                
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../resume.pdf" title="Resume">Resume</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../about/" title="About">About</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../post/" title="Posts">Posts</a>
+                    </li>
+                
+            </ul>
+            <ul id="nav-social" class="list-inline">
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="http://github.com/python151" target="_blank">
+                            <i class="fab fa-github fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="https://www.linkedin.com/in/emilymillerxyz/" target="_blank">
+                            <i class="fab fa-linkedin-in fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+    <hr />
+</header>
+<div class="container">
+    <div class="pl-sm-2">
+        <div class="mb-3">
+            <h3 class="mb-0">Crash course GDB</h3>
+            
+            <small class="text-muted">Published February 10, 2025</small>
+        </div>
+
+        <article>
+            <p>The use of debuggers like GDB is a fundamental skill in binary
+exploitation and reverse engineering, but can be difficult to grasp at first.
+Here&rsquo;s a &ldquo;Crash course&rdquo; GDB.</p>
+<h4 id="what-is-gdb">What is GDB?</h4>
+<p>GDB stands for the GNU Debugger, so put simply, it&rsquo;s a FOSS (Free and Open
+Source Software) debugging tool. At its most basic level, it allows you to run a
+program, set breakpoints, and be able to look &ldquo;inside&rdquo; the program at each of
+those breakpoints, including raw memory (looking at the stack, heap, current
+instructions, etc.) and register values (for instance the instruction pointer or
+stack pointer).</p>
+<p>Base GDB is old, but a lot of development has gone into wrappers around GDB
+including <code>gef</code> and <code>pwngdb</code>. We will not be looking too much into those in this
+tutorial, and in fact I&rsquo;d recommend avoiding them until you have the basics of
+GDB down, but I&rsquo;d recommend reading up on those as you get into more advanced
+exploitation (especially for heap exploitation, a tool like <code>gef</code> allows you to
+inspect bins and see heap allocations much easier).</p>
+<h4 id="enough-waffling-how-do-i-use-it">Enough waffling! How do I use it?</h4>
+<p>Starting from installation, while this is system specific, it can be installed
+with the vast majority of package managers natively. Note: I&rsquo;d <em>highly</em>
+recommend you use Linux when working with CTFs in general, but especially binary
+exploitation, because the vast majority of binaries in CTFs are Linux based.</p>
+<p>Now, let&rsquo;s see an example workflow.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Open the binary in gdb</span>
+</span></span><span style="display:flex;"><span>emily747@nix-framework /path/to/your % gdb ./binary
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disassemble the main function</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> disas main
+</span></span><span style="display:flex;"><span>Dump of assembler code <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">function</span> main:
+</span></span><span style="display:flex;"><span>   0x0000000000401156 &lt;+0&gt;:	    endbr64
+</span></span><span style="display:flex;"><span>   0x000000000040115a &lt;+4&gt;:	    push   rbp
+</span></span><span style="display:flex;"><span>   0x000000000040115b &lt;+5&gt;:	    mov    rbp,rsp
+</span></span><span style="display:flex;"><span>   0x000000000040115e &lt;+8&gt;:	    mov    eax,0x0
+</span></span><span style="display:flex;"><span>   0x0000000000401163 &lt;+13&gt;:	call   0x401136 &lt;vuln&gt;
+</span></span><span style="display:flex;"><span>   0x0000000000401168 &lt;+18&gt;:	mov    eax,0x0
+</span></span><span style="display:flex;"><span>   0x000000000040116d &lt;+23&gt;:	pop    rbp
+</span></span><span style="display:flex;"><span>   0x000000000040116e &lt;+24&gt;:	ret
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Break when the instruction pointer is 13 bytes past main</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># That is, break at a 13 byte offset to main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> break *main+13
+</span></span><span style="display:flex;"><span>Breakpoint <span style="color:#ae81ff">1</span> at 0x401163
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run the program</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> run
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The program will then pause at the breakpoint</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print out the first 800 bytes on the stack in 8 byte chunks</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> x/100gx $sp
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Next we can step over the function call, such that it will</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># continue until main+18 automatically</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> step
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># And to continue the program&#39;s normal flow after that</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> c
+</span></span></code></pre></div><p>It&rsquo;s important to remember that GDB is just a tool, not a magic bullet, and it
+tends to be a tool that doesn&rsquo;t hold your hand a lot. Just like any tool, it can
+only be really be learned with practice.</p>
+
+        </article>
+    </div>
+
+    
+
+            </div>
+        </div><footer class="text-center pb-1">
+    <small class="text-muted">
+        
+            &copy; 2025, Emily Miller <br /> Hosted with <a href='https://tardisproject.uk'>Tardis</a>
+        
+        <br>
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>
+        and <a href="https://github.com/austingebauer/devise" target="_blank">Devise</a>
+    </small>
+</footer>
+</body>
+</html>
