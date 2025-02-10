@@ -28,7 +28,17 @@ void win() {
     return system("/bin/sh");
 }
 int main(int argc, char **argv, char **envp) {
-	print_quotes(argv[1]);
+    char buffer[64];  // Vulnerable buffer size
+    int size;
+
+    printf("Enter the size of your input: ");
+    scanf("%d", &size);  // User inputs the size for fgets
+
+    if (size > 0 && size < sizeof(buffer)) {
+        printf("Enter your input: ");
+        fgets(buffer, size, stdin);
+	    print_quotes(buffer);
+    }
 	return 0;
 }
 void print_quoted(char *s) {
