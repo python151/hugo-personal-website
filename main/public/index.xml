@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Emily Miller</title>
-    <link>//localhost:1313/</link>
+    <link>/</link>
     <description>Recent content on Emily Miller</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2025, Emily Miller &lt;br /&gt; Hosted with &lt;a href=&#39;https://tardisproject.uk&#39;&gt;Tardis&lt;/a&gt;</copyright>
     <lastBuildDate>Sun, 09 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>First Post</title>
-      <link>//localhost:1313/post/first_post/</link>
+      <link>/post/first_post/</link>
       <pubDate>Sun, 09 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/post/first_post/</guid>
+      <guid>/post/first_post/</guid>
       <description>&lt;p&gt;Hey, I have this now! 🎉&#xA;Excited to start sharing my work and ideas here. Stay tuned for more updates!&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/about/</link>
+      <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/about/</guid>
+      <guid>/about/</guid>
       <description>&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;University of Edinburgh&lt;/strong&gt;&#xA;BSc Computer Science and Mathematics (Hons)&#xA;September 2024 - June 2028&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Tarrant County College&lt;/strong&gt;&#xA;Dual Credit Program&#xA;May 2022 - June 2024&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;experience&#34;&gt;Experience&lt;/h2&gt;&#xA;&lt;h3 id=&#34;textron-it-co-op-cloud-operations&#34;&gt;Textron, IT Co-Op, Cloud Operations&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;May 2023 - August 2024 (Part-Time, Avg. 25 hrs/week)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Developed enterprise firewall change request process to streamline changes in ServiceNow, integrating with 7 business units and 3 vendors, impacting over 350 tickets.&lt;/li&gt;&#xA;&lt;li&gt;Assisted in automating operational processes, including the VM modification and decommission workflows, testing, and pushing 17 change requests to production.&lt;/li&gt;&#xA;&lt;li&gt;Automated operational readiness reviews (ORRs) using Azure Service Bus REST API.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;textron-it-intern-cybersecurity-engineering&#34;&gt;Textron, IT Intern, Cybersecurity Engineering&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;August 2022 - May 2023 (Part-Time, Avg. 20 hrs/week)&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>

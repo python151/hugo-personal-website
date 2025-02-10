@@ -19,7 +19,7 @@ copyright = "&copy; 2025, Emily Miller <br /> Hosted with <a href='https://tardi
     identifier = "about"
     name = "About"
     title = "About"
-    url = "/about"
+    url = "/about/"
     weight = -100
   [[menu.main]]
     identifier = "posts"
