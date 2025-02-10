@@ -97,7 +97,7 @@ control with a vulnerability like this.
 ```python
 from pwn import *
 
-process_name = "/challenge/babymem_level7.0"
+process_name = "./vulnerable"
 offset = 123 # Given by the program
 win_address = 0x1234 # You get this from GDB directly, notice the address is
 # shorter because only the last 2 bytes will stay the same
