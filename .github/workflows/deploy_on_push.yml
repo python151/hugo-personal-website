@@ -1,0 +1,20 @@
+name: Curl on Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  curl-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run curl POST request
+      run: |
+        curl -X POST --data "API_KEY=${{ secrets.MANAGEMENT_API_KEY }}" -H
+        "Content-Type: text/plain" https://management-api.emilymiller.xyz/deploy
+
