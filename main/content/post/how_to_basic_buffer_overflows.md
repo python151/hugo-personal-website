@@ -10,8 +10,7 @@ tags = [  ]
 Kind of starting a little basic, but what is a buffer overflow? Effectively,
 when the program is expecting a certain amount of data to be written, and more
 data than that gets written, *overflowing* the buffer. When done on the stack
-(the most basic case), this is often called *stack smashing* (likely popularized
-by the amazing stack canary message "**** stack smashing detected ****").
+(the most basic case), this is often called *stack smashing* (as seen in the amazing stack canary message "**** stack smashing detected ****").
 
 For instance, if our memory looks something like below:
 
