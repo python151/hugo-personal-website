@@ -1,3 +1,4 @@
+baseURL = "https://www.emilymiller.xyz"
 title = "Emily Miller"
 languageCode = "en-us"
 theme = "devise"

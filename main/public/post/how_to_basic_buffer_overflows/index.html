@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html lang="en-us"><head>
     <title>Emily Miller</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -93,8 +93,7 @@ overflows, including an example exploit script." />
             <p>Kind of starting a little basic, but what is a buffer overflow? Effectively,
 when the program is expecting a certain amount of data to be written, and more
 data than that gets written, <em>overflowing</em> the buffer. When done on the stack
-(the most basic case), this is often called <em>stack smashing</em> (likely popularized
-by the amazing stack canary message &ldquo;**** stack smashing detected ****&rdquo;).</p>
+(the most basic case), this is often called <em>stack smashing</em> (as seen in the amazing stack canary message &ldquo;**** stack smashing detected ****&rdquo;).</p>
 <p>For instance, if our memory looks something like below:</p>
 <p><code>| Other function memory (variables, etc.) | Buffer | More function memory | return address |</code></p>
 <p>What we can do to gain control flow is write through that Buffer and the
