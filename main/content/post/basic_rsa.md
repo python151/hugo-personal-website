@@ -18,7 +18,7 @@ Cryptosystem:
 $N=p\*q$, then we can use Euler's theorem and some properties of Euler's totient
 function ($\phi(n)$), to show that $\phi(N)=(p-1)\*(q-1)$, and hence $d = e^{-1} \mod \phi(N)$, which is trivial to calculate.
 	- From this, you can note that if you're able to factor N, then you'll get both primes and you can trivially calculate $d$. In this way, modern RSA is protected by the difficulty of factorization
-- Also, in the real world, you should always use a padding scheme to protect against chosen plaintext attacks, the fact that it's deterministic and homomorphic, *but*, this isn't always (or in fact, usually) done in CTFs and RSA *can* still be secure without one, albeit conditionally on the stars aligning (and unlike [[AES]], you don't *have* to have a padding scheme for it to work)
+- Also, in the real world, you should always use a padding scheme to protect against chosen plaintext attacks, the fact that it's deterministic and homomorphic, *but*, this isn't always (or in fact, usually) done in CTFs and RSA *can* still be secure without one, albeit conditionally on the stars aligning (and unlike AES, you don't *have* to have a padding scheme for it to work)
 
 Some common vulnerabilities:
 - Bad e:
