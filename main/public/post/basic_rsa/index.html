@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Emily Miller</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Basic overview of the RSA cryptosystem and some of its attacks." />
+
+    
+    
+    
+    <link rel="stylesheet" href="../../css/theme.min.css">
+
+    
+    
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });">
+</script>
+
+
+    
+</head>
+<body>
+        <div id="content" class="mx-auto"><header class="container mt-sm-5 mt-4 mb-4 mt-xs-1">
+    <div class="row">
+        
+        <div class="col-sm-4 col-12 text-sm-right text-center pt-sm-4">
+            <a href="../../" class="text-decoration-none">
+                <img id="home-image" class="rounded-circle"
+                    
+                        
+                            src="../../avatar.jpg"
+                        
+                    
+                />
+            </a>
+        </div>
+        <div class="col-sm-8 col-12 text-sm-left text-center">
+        
+            <h2 class="m-0 mb-2 mt-4">
+                <a href="../../" class="text-decoration-none">
+                    
+                        Emily Miller
+                    
+                </a>
+            </h2>
+            <p class="text-muted mb-1">
+                
+                    Hey there! I&#39;m Emily, a current student and tech enthuse. I&#39;m especially interested in Cybersecurity and Vulnerability research, and write technical blogs describing predominantly binary exploitation and cryptography.
+                
+            </p>
+            <ul id="nav-links" class="list-inline mb-2">
+                
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../resume.pdf" title="Resume">Resume</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../about/" title="About">About</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../post/" title="Posts">Posts</a>
+                    </li>
+                
+            </ul>
+            <ul id="nav-social" class="list-inline">
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="http://github.com/python151" target="_blank">
+                            <i class="fab fa-github fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="https://www.linkedin.com/in/emilymillerxyz/" target="_blank">
+                            <i class="fab fa-linkedin-in fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+    <hr />
+</header>
+<div class="container">
+    <div class="pl-sm-2">
+        <div class="mb-3">
+            <h3 class="mb-0">RSA Cheatsheet</h3>
+            
+            <small class="text-muted">Published June 5, 2025</small>
+        </div>
+
+        <article>
+            <p>Links:</p>
+<ul>
+<li><a href="https://github.com/mohamm4c/Attacks-On-RSA-using-Python/blob/main/Different_Attacks_on_RSA_system-Final.pdf">https://github.com/mohamm4c/Attacks-On-RSA-using-Python/blob/main/Different_Attacks_on_RSA_system-Final.pdf</a></li>
+<li><a href="https://www.ams.org/notices/199902/boneh.pdf">https://www.ams.org/notices/199902/boneh.pdf</a></li>
+<li><a href="https://eprint.iacr.org/2012/064.pdf">https://eprint.iacr.org/2012/064.pdf</a></li>
+</ul>
+<p>Cryptosystem:</p>
+<ul>
+<li>Pick some e (usually <code>0x10001</code>), and large N. These are made public. Now, pick some d, s.t. for any given m, $(m^e)^d=m \mod N$.  Also, we call the ciphertext $ct=m^e \mod N$</li>
+<li>In practice we usually keep e constant, and pick two primes $p,q$, and saying
+$N=p*q$, then we can use Euler&rsquo;s theorem and some properties of Euler&rsquo;s totient
+function ($\phi(n)$), to show that $\phi(N)=(p-1)*(q-1)$, and hence $d = e^{-1} \mod \phi(N)$, which is trivial to calculate.
+<ul>
+<li>From this, you can note that if you&rsquo;re able to factor N, then you&rsquo;ll get both primes and you can trivially calculate $d$. In this way, modern RSA is protected by the difficulty of factorization</li>
+</ul>
+</li>
+<li>Also, in the real world, you should always use a padding scheme to protect against chosen plaintext attacks, the fact that it&rsquo;s deterministic and homomorphic, <em>but</em>, this isn&rsquo;t always (or in fact, usually) done in CTFs and RSA <em>can</em> still be secure without one, albeit conditionally on the stars aligning (and unlike [[AES]], you don&rsquo;t <em>have</em> to have a padding scheme for it to work)</li>
+</ul>
+<p>Some common vulnerabilities:</p>
+<ul>
+<li>Bad e:
+<ul>
+<li>If e=1, then d=1 (so ct = m)</li>
+<li>If e=3 (or a similarly very low number), and N is very high, there&rsquo;s a decent chance you can just put <code>ct^(1/e)</code>  in sage to get m</li>
+</ul>
+</li>
+<li>Bad d:
+<ul>
+<li>If $d &lt; \frac{1}{3}N^\frac{1}{4}$, you can recover d with the Wiener
+Attack.</li>
+</ul>
+</li>
+<li>Bad N / prime choices:
+<ul>
+<li>This is probably one of the most common, but remember that the security of it relies on the difficulty of calculating $\phi(N)$, so anything I&rsquo;d say 1024 bits or lower total is in the danger zone of crackable
+<ul>
+<li>If you&rsquo;re ever unsure, just throw it into factordb.com and run <code>factor(N)</code> in sage.</li>
+</ul>
+</li>
+<li>Also, you&rsquo;ll sometimes see some weird setups where they choose only one
+prime and use that for N (so $\phi(N)=N-1$), or they&rsquo;ll choose only one
+prime and use its square for N (so $\phi(N)=\phi(p^2)=p(p-1)$), or similar
+<ul>
+<li>If you ever see a weird way of calculating your N, write it out to see if there may be a shortcut to calculate $\phi(N)$.</li>
+</ul>
+</li>
+<li>If $p$ and $q$ are very close, then you can use
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Fermat%27s_factorization_method">https://en.wikipedia.org/wiki/Fermat%27s_factorization_method</a></li>
+</ul>
+</li>
+<li>If one of your primes is of the form $4p-1 = Ds^2$.  Here, D should be a small, square-free integer (an integer not divisible by any perfect square other than 1), and s is an integer. If this is the case, you can use Cheng&rsquo;s 4p-1 factorization algorithm.
+<ul>
+<li>It&rsquo;s niche, but it&rsquo;s a hell of an RSA backdoor</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Situational / many variable weirdness:
+<ul>
+<li>If you have multiple N with overlapping primes
+<ul>
+<li>For instance, $N_1=p*q_1, N_2=p*q_2$, then $p=\gcd(N_1, N_2)$, which can be breaks both almost instantly</li>
+<li>This is actually way more real world than you may think, because it&rsquo;s significantly quicker to check hundreds or even thousands of public keys you find on the internet against each other, in the hopes that two of them happen to have collided, which instantly breaks both keys, see <a href="https://eprint.iacr.org/2012/064.pdf">here</a></li>
+</ul>
+</li>
+<li>Shared Modulus Attack
+<ul>
+<li>If you have the same $m$ and $N$, but different $e_1$, $e_2$, etc. then you can use extended euclidean to recover $N$</li>
+</ul>
+</li>
+<li>Håstad’s Broadcast Attack
+<ul>
+<li>Same m, small e, multiple different N</li>
+<li>Use Chinese Remainder Theorem + e-th root to recover m</li>
+</ul>
+</li>
+<li>Same N, with known $e_0,d_0$ key pair and $e_1$.
+<ul>
+<li>So, we&rsquo;re sharing N, and with that N we have some valid $e$ and $d$, but need to decrypt a different $e$ with the same N.</li>
+<li>There&rsquo;s an algorithm to factor N efficiently, it doesn&rsquo;t always work,
+but it does often.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </article>
+    </div>
+
+    
+
+            </div>
+        </div><footer class="text-center pb-1">
+    <small class="text-muted">
+        
+            &copy; 2025, Emily Miller <br /> Hosted with <a href='https://tardisproject.uk'>Tardis</a>
+        
+        <br>
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>
+        and <a href="https://github.com/austingebauer/devise" target="_blank">Devise</a>
+    </small>
+</footer>
+</body>
+</html>

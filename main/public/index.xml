@@ -2,46 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Emily Miller</title>
-    <link>https://www.emilymiller.xyz/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Emily Miller</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2025, Emily Miller &lt;br /&gt; Hosted with &lt;a href=&#39;https://tardisproject.uk&#39;&gt;Tardis&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 11 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://www.emilymiller.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RSA Cheatsheet</title>
+      <link>http://localhost:1313/post/basic_rsa/</link>
+      <pubDate>Thu, 05 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/basic_rsa/</guid>
+      <description>&lt;p&gt;Links:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/mohamm4c/Attacks-On-RSA-using-Python/blob/main/Different_Attacks_on_RSA_system-Final.pdf&#34;&gt;https://github.com/mohamm4c/Attacks-On-RSA-using-Python/blob/main/Different_Attacks_on_RSA_system-Final.pdf&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.ams.org/notices/199902/boneh.pdf&#34;&gt;https://www.ams.org/notices/199902/boneh.pdf&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://eprint.iacr.org/2012/064.pdf&#34;&gt;https://eprint.iacr.org/2012/064.pdf&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Cryptosystem:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Pick some e (usually &lt;code&gt;0x10001&lt;/code&gt;), and large N. These are made public. Now, pick some d, s.t. for any given m, $(m^e)^d=m \mod N$.  Also, we call the ciphertext $ct=m^e \mod N$&lt;/li&gt;&#xA;&lt;li&gt;In practice we usually keep e constant, and pick two primes $p,q$, and saying&#xA;$N=p*q$, then we can use Euler&amp;rsquo;s theorem and some properties of Euler&amp;rsquo;s totient&#xA;function ($\phi(n)$), to show that $\phi(N)=(p-1)*(q-1)$, and hence $d = e^{-1} \mod \phi(N)$, which is trivial to calculate.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;From this, you can note that if you&amp;rsquo;re able to factor N, then you&amp;rsquo;ll get both primes and you can trivially calculate $d$. In this way, modern RSA is protected by the difficulty of factorization&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Also, in the real world, you should always use a padding scheme to protect against chosen plaintext attacks, the fact that it&amp;rsquo;s deterministic and homomorphic, &lt;em&gt;but&lt;/em&gt;, this isn&amp;rsquo;t always (or in fact, usually) done in CTFs and RSA &lt;em&gt;can&lt;/em&gt; still be secure without one, albeit conditionally on the stars aligning (and unlike [[AES]], you don&amp;rsquo;t &lt;em&gt;have&lt;/em&gt; to have a padding scheme for it to work)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Some common vulnerabilities:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Crash course GDB</title>
-      <link>https://www.emilymiller.xyz/post/gdb_basics/</link>
+      <link>http://localhost:1313/post/gdb_basics/</link>
       <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>https://www.emilymiller.xyz/post/gdb_basics/</guid>
+      <guid>http://localhost:1313/post/gdb_basics/</guid>
       <description>&lt;p&gt;The use of debuggers like GDB is a fundamental skill in binary&#xA;exploitation and reverse engineering, but can be difficult to grasp at first.&#xA;Here&amp;rsquo;s a &amp;ldquo;Crash course&amp;rdquo; GDB.&lt;/p&gt;&#xA;&lt;h4 id=&#34;what-is-gdb&#34;&gt;What is GDB?&lt;/h4&gt;&#xA;&lt;p&gt;GDB stands for the GNU Debugger, so put simply, it&amp;rsquo;s a FOSS (Free and Open&#xA;Source Software) debugging tool. At its most basic level, it allows you to run a&#xA;program, set breakpoints, and be able to look &amp;ldquo;inside&amp;rdquo; the program at each of&#xA;those breakpoints, including raw memory (looking at the stack, heap, current&#xA;instructions, etc.) and register values (for instance the instruction pointer or&#xA;stack pointer).&lt;/p&gt;</description>
     </item>
     <item>
       <title>How to: Basic buffer overflows without stack protections</title>
-      <link>https://www.emilymiller.xyz/post/how_to_basic_buffer_overflows/</link>
+      <link>http://localhost:1313/post/how_to_basic_buffer_overflows/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>https://www.emilymiller.xyz/post/how_to_basic_buffer_overflows/</guid>
+      <guid>http://localhost:1313/post/how_to_basic_buffer_overflows/</guid>
       <description>&lt;p&gt;Kind of starting a little basic, but what is a buffer overflow? Effectively,&#xA;when the program is expecting a certain amount of data to be written, and more&#xA;data than that gets written, &lt;em&gt;overflowing&lt;/em&gt; the buffer. When done on the stack&#xA;(the most basic case), this is often called &lt;em&gt;stack smashing&lt;/em&gt; (as seen in the amazing stack canary message &amp;ldquo;**** stack smashing detected ****&amp;rdquo;).&lt;/p&gt;&#xA;&lt;p&gt;For instance, if our memory looks something like below:&lt;/p&gt;</description>
     </item>
     <item>
       <title>How to: Buffer overflows with PIE, Canaries, and NX Bit</title>
-      <link>https://www.emilymiller.xyz/post/how_to_buffer_overflows_with_stack_protections/</link>
+      <link>http://localhost:1313/post/how_to_buffer_overflows_with_stack_protections/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>https://www.emilymiller.xyz/post/how_to_buffer_overflows_with_stack_protections/</guid>
+      <guid>http://localhost:1313/post/how_to_buffer_overflows_with_stack_protections/</guid>
       <description>&lt;p&gt;What stack protections are we talking about? Here we&amp;rsquo;re only talking about&#xA;bypassing PIE, Stack Canaries, and NX Bit, because these are found in almost every binary&#xA;compiled nowadays and you will be expected to know this in any basic binary&#xA;exploitation exercise.&lt;/p&gt;&#xA;&lt;h4 id=&#34;you-speak-all-these-words-woman-but-i-understand-not&#34;&gt;You speak all these words, woman, but I understand not.&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;What&amp;rsquo;s PIE?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;PIE stands for Position Independent Executable, and all it means is&#xA;that it can get loaded into different positions in memory randomly at runtime,&#xA;which makes exploitation a bit harder. How do we bypass this in terms of buffer&#xA;overflows?  Using &lt;em&gt;partial address overwrites&lt;/em&gt;! Instead of overwriting the&#xA;entire buffer, we can only overwrite the last 2 bytes, and because of things get&#xA;loaded in, 12 of those bytes will be the same every time, so we only need to&#xA;brute force 2^4 or 16 combinations.&lt;/p&gt;</description>
     </item>
     <item>
       <title>First Post</title>
-      <link>https://www.emilymiller.xyz/post/first_post/</link>
+      <link>http://localhost:1313/post/first_post/</link>
       <pubDate>Sun, 09 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>https://www.emilymiller.xyz/post/first_post/</guid>
+      <guid>http://localhost:1313/post/first_post/</guid>
       <description>&lt;p&gt;Hey, I have this now! 🎉&#xA;Excited to start sharing my work and ideas here. Stay tuned for more updates!&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>https://www.emilymiller.xyz/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://www.emilymiller.xyz/about/</guid>
+      <guid>http://localhost:1313/about/</guid>
       <description>&lt;h3 id=&#34;getent-passwd-emily--awk--f-print-5&#34;&gt;&lt;code&gt;getent passwd emily | awk -F: &#39;{print $5}&#39;&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve always thought the &lt;code&gt;whoami&lt;/code&gt; thing is dumb because it would only actually&#xA;print your username, and a more realistic command would print the description&#xA;field. So&amp;hellip; here we are.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m Emily! I&amp;rsquo;m a current student at The University of Edinburgh, where I study Computer Science and Mathematics. My main interests lie in sysadmin and infosec. I&amp;rsquo;m a CTF player and I predominantly do pwn (binary exploitation), though I sometimes venture into the realm of rev and crypto (not cryptocurrency, the fun one). In my spare time I do homelab, and am a chronic tinkerer.&lt;/p&gt;</description>
     </item>
   </channel>
