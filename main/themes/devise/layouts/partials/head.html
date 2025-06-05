@@ -1,0 +1,32 @@
+<head>
+    <title>{{ .Site.Title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
+
+    {{/* Adds complete override capability */}}
+    {{ $overrideTemplate := resources.Get "sass/override.scss" }}
+    {{ $override := $overrideTemplate | resources.ExecuteAsTemplate "css/theme.scss" . | toCSS | minify }}
+    <link rel="stylesheet" href="{{ $override.RelPermalink }}">
+
+    {{/* Adds custom styles capability */}}
+    {{ $customTemplate := resources.Get "sass/custom.scss" }}
+    {{ if $customTemplate }}
+    {{ $custom := $customTemplate | resources.ExecuteAsTemplate "css/custom.scss" . | toCSS | minify }}
+    <link rel="stylesheet" href="{{ $custom.RelPermalink }}">
+    {{ end }}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });">
+</script>
+
+
+    {{ template "_internal/google_analytics.html" . }}
+</head>
