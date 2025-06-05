@@ -86,7 +86,7 @@ p.sendline(bytes(str(offset+8), "utf-8"))
 p.sendline(payload)
 
 # Reap the benefits
-data = p.interactive()
+p.interactive()
 ```
 Another important thing to keep in mind is those parameters need to be
 determined by you, the attacker. There are ways of getting around this,
