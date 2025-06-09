@@ -40,7 +40,7 @@ Some common vulnerabilities:
 		- It's niche, but it's a hell of an RSA backdoor
 - Situational / many variable weirdness:
 	- If you have multiple N with overlapping primes
-		- For instance, $N_1=p\*q_1, N_2=p\*q_2$, then $p=\gcd(N_1, N_2)$, which can be breaks both almost instantly
+		- For instance, $N_1=p\*q_1, N_2=p\*q_2$, then $p=\gcd(N_1, N_2)$, which breaks both almost instantly
 		- This is actually way more real world than you may think, because it's significantly quicker to check hundreds or even thousands of public keys you find on the internet against each other, in the hopes that two of them happen to have collided, which instantly breaks both keys, see [here](https://eprint.iacr.org/2012/064.pdf)
 	- Shared Modulus Attack
 		- If you have the same $m$ and $N$, but different $e_1$, $e_2$, etc. then you can use extended euclidean to recover $N$
