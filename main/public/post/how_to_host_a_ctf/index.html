@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en-us"><head>
+    <title>Emily Miller</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A crash course in CTF infrastructure" />
+
+    
+    
+    
+    <link rel="stylesheet" href="../../css/theme.min.css">
+
+    
+    
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });">
+</script>
+
+
+    
+</head>
+<body>
+        <div id="content" class="mx-auto"><header class="container mt-sm-5 mt-4 mb-4 mt-xs-1">
+    <div class="row">
+        
+        <div class="col-sm-4 col-12 text-sm-right text-center pt-sm-4">
+            <a href="../../" class="text-decoration-none">
+                <img id="home-image" class="rounded-circle"
+                    
+                        
+                            src="../../avatar.jpg"
+                        
+                    
+                />
+            </a>
+        </div>
+        <div class="col-sm-8 col-12 text-sm-left text-center">
+        
+            <h2 class="m-0 mb-2 mt-4">
+                <a href="../../" class="text-decoration-none">
+                    
+                        Emily Miller
+                    
+                </a>
+            </h2>
+            <p class="text-muted mb-1">
+                
+                    Hey there! I&#39;m Emily, a current student and tech enthuse. I&#39;m especially interested in Cybersecurity and Vulnerability research, and write technical blogs describing predominantly binary exploitation and cryptography.
+                
+            </p>
+            <ul id="nav-links" class="list-inline mb-2">
+                
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../resume.pdf" title="Resume">Resume</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../about/" title="About">About</a>
+                    </li>
+                
+                    <li class="list-inline-item">
+                        <a class="badge badge-white " href="../../post/" title="Posts">Posts</a>
+                    </li>
+                
+            </ul>
+            <ul id="nav-social" class="list-inline">
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="http://github.com/python151" target="_blank">
+                            <i class="fab fa-github fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+                    <li class="list-inline-item mr-3">
+                        <a href="https://www.linkedin.com/in/emilymillerxyz/" target="_blank">
+                            <i class="fab fa-linkedin-in fa-1x text-muted"></i>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+    <hr />
+</header>
+<div class="container">
+    <div class="pl-sm-2">
+        <div class="mb-3">
+            <h3 class="mb-0">How to host a CTF</h3>
+            
+            <small class="text-muted">Published August 17, 2025</small>
+        </div>
+
+        <article>
+            <h1 id="part-0-infrastructure">Part 0: Infrastructure</h1>
+<p>In order to run this, you&rsquo;ll need some sort of server (a VM in Azure, AWS, Google Cloud, or a VPS will do just fine for this purpose), and you&rsquo;ll likely want a domain name. If you&rsquo;ve never worked with servers or DNS before, I&rsquo;d recommend reading a bit about <a href="https://www.redhat.com/en/blog/dns-domain-name-servers">DNS</a> and and follow a <a href="https://krystal.io/blog/post/beginner-s-guide-to-setting-up-a-vps-virtual-private-server">guide to setup a basic website</a>.</p>
+<h1 id="part-1-getting-your-platform-up">Part 1: Getting your platform up</h1>
+<p>Generally, in the year of our lord 2025, it&rsquo;s relatively easy to get a decent self hosted CTF platform up and running. For most people that&rsquo;s CTFd or rCTF. We&rsquo;ll focus on CTFd, because that&rsquo;s by far the most popular and very easy to get a basic set of containers running.</p>
+<p>To start, go to the <a href="https://github.com/CTFd/CTFd">github repo</a> and clone the most recent stable version. I&rsquo;d recommend cloning this into a directory with a name of the CTF you&rsquo;re running, because docker-compose will automatically namespace all containers by name of their containing directory (so if you always keep CTFd, they will all get namespaced together). That is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir my_ctf
+</span></span><span style="display:flex;"><span>git clone https://github.com/CTFd/CTFd.git my_ctf
+</span></span></code></pre></div><p>This next step is optional, but is very useful to know how to do. You&rsquo;ll want to use your editor of choice to change the <code>docker-compose.yml</code> file to change the port bindings. The file will look something like the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ctfd</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">build</span>: <span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">user</span>: <span style="color:#ae81ff">root</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;1337:8000&#34;</span> <span style="color:#75715e"># change this line right here</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">UPLOAD_FOLDER=/var/uploads</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">DATABASE_URL=mysql+pymysql://ctfd:ctfd@db/ctfd</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">REDIS_URL=redis://cache:6379</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">WORKERS=1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">LOG_FOLDER=/var/log/CTFd</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">ACCESS_LOG=-</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># file continues....</span>
+</span></span></code></pre></div><p>In this case, I&rsquo;ve changed the port from 8000 to 1337 (by default the line looks like <code>&quot;8000:8000&quot;</code>)</p>
+<p>Next, you&rsquo;ll need to go ahead and build and run the containers, this is simple enough.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd my_ctf
+</span></span><span style="display:flex;"><span>sudo docker compose build
+</span></span><span style="display:flex;"><span>sudo docker compose up -d
+</span></span></code></pre></div><p>Now, your CTFd instance should be available at the port entered. You can test this by running <code>curl localhost:1337</code> (or whatever port you&rsquo;re binding to). By default this will run as HTTP only. It&rsquo;s 2025, TLSv3 is the standard, so how do we get that glorius lock icon? There are many ways of doing this, and if you already are using a reverse proxy like caddy, nginx, or something similar, you may already have a solution to this. If you don&rsquo;t have one already, I&rsquo;d recommend caddy. It&rsquo;s very simple to use and will do most of the work for you.</p>
+<p>To setup caddy for this, you&rsquo;ll want to go into a new directory, and create 2 files: another <code>docker-compose.yml</code> and a <code>Caddyfile</code>.</p>
+<p>Put the following in your docker-compose.yml:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">caddy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">caddy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">caddy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#39;80:80&#39;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#39;443:443&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./Caddyfile:/etc/caddy/Caddyfile</span>
+</span></span></code></pre></div><p>Then the following in your Caddyfile:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-caddy" data-lang="caddy"><span style="display:flex;"><span><span style="color:#75715e"># Note: You&#39;ll need to change this to your actual domain name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>my_ctf.example.com {<span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	# Note: You may need to change this port to whatever port you setup your CTFd instance to
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">reverse_proxy</span> localhost:<span style="color:#ae81ff">1337</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now you can bring the container up, and it should automatically grab a certificate and handle proxying for you!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo docker compose up -d
+</span></span></code></pre></div><h1 id="part-2-challenge-hosting">Part 2: Challenge hosting</h1>
+<p>This section is a work in progress, but I&rsquo;d recommend looking into <a href="https://github.com/redpwn/jail">redjail</a>for most pwn challenges</p>
+
+        </article>
+    </div>
+
+    
+
+            </div>
+        </div><footer class="text-center pb-1">
+    <small class="text-muted">
+        
+            &copy; 2025, Emily Miller <br /> Hosted with <a href='https://tardisproject.uk'>Tardis</a>
+        
+        <br>
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>
+        and <a href="https://github.com/austingebauer/devise" target="_blank">Devise</a>
+    </small>
+</footer>
+</body>
+</html>

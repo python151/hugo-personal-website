@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html lang="en-us"><head>
     <title>Emily Miller</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -117,7 +117,7 @@ function ($\phi(n)$), to show that $\phi(N)=(p-1)*(q-1)$, and hence $d = e^{-1} 
 <li>From this, you can note that if you&rsquo;re able to factor N, then you&rsquo;ll get both primes and you can trivially calculate $d$. In this way, modern RSA is protected by the difficulty of factorization</li>
 </ul>
 </li>
-<li>Also, in the real world, you should always use a padding scheme to protect against chosen plaintext attacks, the fact that it&rsquo;s deterministic and homomorphic, <em>but</em>, this isn&rsquo;t always (or in fact, usually) done in CTFs and RSA <em>can</em> still be secure without one, albeit conditionally on the stars aligning (and unlike [[AES]], you don&rsquo;t <em>have</em> to have a padding scheme for it to work)</li>
+<li>Also, in the real world, you should always use a padding scheme to protect against chosen plaintext attacks, the fact that it&rsquo;s deterministic and homomorphic, <em>but</em>, this isn&rsquo;t always (or in fact, usually) done in CTFs and RSA <em>can</em> still be secure without one, albeit conditionally on the stars aligning (and unlike AES, you don&rsquo;t <em>have</em> to have a padding scheme for it to work)</li>
 </ul>
 <p>Some common vulnerabilities:</p>
 <ul>
@@ -163,7 +163,7 @@ prime and use its square for N (so $\phi(N)=\phi(p^2)=p(p-1)$), or similar
 <ul>
 <li>If you have multiple N with overlapping primes
 <ul>
-<li>For instance, $N_1=p*q_1, N_2=p*q_2$, then $p=\gcd(N_1, N_2)$, which can be breaks both almost instantly</li>
+<li>For instance, $N_1=p*q_1, N_2=p*q_2$, then $p=\gcd(N_1, N_2)$, which breaks both almost instantly</li>
 <li>This is actually way more real world than you may think, because it&rsquo;s significantly quicker to check hundreds or even thousands of public keys you find on the internet against each other, in the hopes that two of them happen to have collided, which instantly breaks both keys, see <a href="https://eprint.iacr.org/2012/064.pdf">here</a></li>
 </ul>
 </li>

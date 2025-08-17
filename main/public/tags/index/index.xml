@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Index on Emily Miller</title>
-    <link>http://localhost:1313/tags/index/</link>
-    <description>Recent content in Index on Emily Miller</description>
-    <generator>Hugo</generator>
+    <title>index on Emily Miller</title>
+    <link>https://www.emilymiller.xyz/tags/index/</link>
+    <description>Recent content in index on Emily Miller</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2025, Emily Miller &lt;br /&gt; Hosted with &lt;a href=&#39;https://tardisproject.uk&#39;&gt;Tardis&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 05 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&amp;copy; 2025, Emily Miller &lt;br /&gt; Hosted with &lt;a href=&#39;https://tardisproject.uk&#39;&gt;Tardis&lt;/a&gt;</copyright><atom:link href="https://www.emilymiller.xyz/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Posts</title>
-      <link>http://localhost:1313/post/</link>
-      <pubDate>Thu, 05 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/</guid>
+      <link>https://www.emilymiller.xyz/post/</link>
+      <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.emilymiller.xyz/post/</guid>
       <description></description>
     </item>
+    
   </channel>
 </rss>
