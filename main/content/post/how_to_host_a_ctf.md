@@ -50,7 +50,7 @@ sudo docker compose build
 sudo docker compose up -d
 ```
 
-Now, your CTFd instance should be available at the port entered. You can test this by running `curl localhost:1337` (or whatever port you're binding to). By default this will run as HTTP only. It's 2025, TLSv3 is the standard, so how do we get that glorius lock icon? There are many ways of doing this, and if you already are using a reverse proxy like caddy, nginx, or something similar, you may already have a solution to this. If you don't have one already, I'd recommend caddy. It's very simple to use and will do most of the work for you.
+Now, your CTFd instance should be available at the port entered. You can test this by running `curl localhost:1337` (or whatever port you're binding to). By default this will run as HTTP only. It's 2025, TLSv1.3 is the standard, so how do we get that glorius lock icon? There are many ways of doing this, and if you already are using a reverse proxy like caddy, nginx, or something similar, you may already have a solution to this. If you don't have one already, I'd recommend caddy. It's very simple to use and will do most of the work for you.
 
 To setup caddy for this, you'll want to go into a new directory, and create 2 files: another `docker-compose.yml` and a `Caddyfile`.
 
