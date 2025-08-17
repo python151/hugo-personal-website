@@ -84,3 +84,6 @@ Now you can bring the container up, and it should automatically grab a certifica
 sudo docker compose up -d
 ```
 
+# Part 2: Challenge hosting
+
+This section is a work in progress, but I'd recommend looking into [redjail](https://github.com/redpwn/jail)for most pwn challenges
