@@ -7,7 +7,7 @@ on:
 
 jobs:
   curl-job:
-    runs-on: alpine/curl
+    runs-on: alpine-latest
 
     steps:
     - name: Checkout code
