@@ -3,7 +3,7 @@ author = "Emily Miller"
 title = "How to host a CTF"
 date = "2025-08-17"
 description = "A crash course in CTF infrastructure"
-tags = [  ]
+categories = [ "misc" ]
 +++
 
 # Part 0: Infrastructure
