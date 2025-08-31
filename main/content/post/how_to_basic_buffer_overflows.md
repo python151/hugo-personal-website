@@ -4,7 +4,7 @@ title = "How to: Basic buffer overflows without stack protections"
 date = "2025-02-10"
 description = """This is a simple guide on how to perform basic buffer
 overflows, including an example exploit script."""
-tags = [  ]
+categories = [ "binary-exploitation" ]
 +++
 
 Kind of starting a little basic, but what is a buffer overflow? Effectively,
