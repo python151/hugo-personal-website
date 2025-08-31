@@ -14,7 +14,7 @@ To install, you'll typically run something like `sudo apt install python3-pwntoo
 
 ## What utilities does this give me?
 
-The main way to see `pwntools` command line utilities is by running `pwn [utility_name] [arguments]`, for instance `pwn checksec ./mybinary` will check the protections of the binary called `mybinary`. These are documented in more depth [here] (https://docs.pwntools.com/en/stable/commandline.html).
+The main way to see `pwntools` command line utilities is by running `pwn [utility_name] [arguments]`, for instance `pwn checksec ./mybinary` will check the protections of the binary called `mybinary`. These are documented in more depth [here](https://docs.pwntools.com/en/stable/commandline.html).
 
 ## How do I write exploits with it?
 
