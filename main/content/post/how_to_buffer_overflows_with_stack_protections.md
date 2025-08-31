@@ -4,7 +4,7 @@ title = "How to: Buffer overflows with PIE, Canaries, and NX Bit"
 date = "2025-02-10"
 description = """Here's a (more) realistic guide on how to exploit a modern buffer
 overflow"""
-tags = [  ]
+categories = [ "binary-exploitation" ]
 +++
 
 What stack protections are we talking about? Here we're only talking about
