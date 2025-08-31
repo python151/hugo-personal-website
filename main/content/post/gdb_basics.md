@@ -5,7 +5,7 @@ date = "2025-02-11"
 description = """The use of debuggers like GDB is a fundamental skill in binary
 exploitation and reverse engineering, but can be difficult to grasp at first.
 Here's a 'Crash course' GDB.""""
-tags = [  ]
+categories = [ "binary-exploitation" "tooling-guides" ]
 +++
 
 The use of debuggers like GDB is a fundamental skill in binary
