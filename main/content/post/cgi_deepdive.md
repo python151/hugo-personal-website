@@ -3,7 +3,7 @@ author = "Emily Miller"
 title = "A brief dive into CGI"
 date = "2025-08-30"
 description = "Common Gateway Interface (CGI) is one of the oldest technologies still in use today to make web applications."
-tags = [  ]
+categories = [ "misc" ]
 +++
 
 [RFC 3875](https://www.rfc-editor.org/rfc/rfc3875) is the first RFC to discuss CGI in depth. Notably, this is not a formal specification, but rather a description of how CGI is commonly done in practice. To give a brief introduction to the technology from this RFC:
