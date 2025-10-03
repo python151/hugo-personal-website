@@ -62,7 +62,7 @@ exec busybox init
 
 ### Adding a custom userspace binary
 
-Notice in the above script that the actual script switches to `/bin/sh` at the final (`setsid`) step. If you wanted, you could replace this with another custom compiled binary in `/challenge`. This would allow you to give a userspace pwn into kernel pwn if you wanted to (for instance, shellcoding into kernel pwn).
+Notice in the above script that the actual script switches to a login shell at the final step in the `busybox init`. If you wanted, you could simply rebuild the init script from scratch to launch directly into your binary. This would allow you to give a userspace pwn into kernel pwn if you wanted to (for instance, shellcoding into kernel pwn). Alternatively, you can set a users shell to your custom binary, which would launch them directly into the userspace program.
 
 Alternatively, if you wanted to build a jail breakout challenge, this same process could be used to provide kernel isolation.
 
